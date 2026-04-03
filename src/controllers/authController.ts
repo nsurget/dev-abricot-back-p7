@@ -318,8 +318,50 @@ export const getProfile = async (
 };
 
 /**
- * Mettre à jour le profil de l'utilisateur connecté
- * PUT /auth/profile
+ * @swagger
+ * /auth/profile:
+ *   put:
+ *     summary: Mettre à jour le profil de l'utilisateur connecté
+ *     tags: [Authentification]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 description: Nouveau nom de l'utilisateur
+ *                 example: "John Smith"
+ *               email:
+ *                 type: string
+ *                 format: email
+ *                 description: Nouvel email de l'utilisateur
+ *                 example: "john.smith@example.com"
+ *     responses:
+ *       200:
+ *         description: Profil mis à jour avec succès
+ *         content:
+ *           application/json:
+ *             schema:
+ *               allOf:
+ *                 - $ref: '#/components/schemas/Success'
+ *                 - type: object
+ *                   properties:
+ *                     data:
+ *                       type: object
+ *                       properties:
+ *                         user:
+ *                           $ref: '#/components/schemas/User'
+ *       400:
+ *         description: Données invalides
+ *       401:
+ *         description: Non authentifié
+ *       409:
+ *         description: Email déjà utilisé
  */
 export const updateProfile = async (
   req: Request,
@@ -392,8 +434,38 @@ export const updateProfile = async (
 };
 
 /**
- * Mettre à jour le mot de passe de l'utilisateur connecté
- * PUT /auth/password
+ * @swagger
+ * /auth/password:
+ *   put:
+ *     summary: Mettre à jour le mot de passe de l'utilisateur connecté
+ *     tags: [Authentification]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - currentPassword
+ *               - newPassword
+ *             properties:
+ *               currentPassword:
+ *                 type: string
+ *                 description: Mot de passe actuel
+ *                 example: "oldPassword123"
+ *               newPassword:
+ *                 type: string
+ *                 description: Nouveau mot de passe (min 8 car., 1 maj., 1 min., 1 chiffre)
+ *                 example: "NewPassword123!"
+ *     responses:
+ *       200:
+ *         description: Mot de passe mis à jour avec succès
+ *       400:
+ *         description: Données invalides
+ *       401:
+ *         description: Mot de passe actuel incorrect ou non authentifié
  */
 export const updatePassword = async (
   req: Request,
