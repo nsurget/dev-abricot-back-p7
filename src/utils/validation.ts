@@ -57,7 +57,7 @@ export const validateRegisterData = (data: {
     errors.push({
       field: "password",
       message:
-        "Le mot de passe doit contenir au moins 8 caractères, une lettre majuscule, une lettre minuscule et un chiffre",
+        "Le mot de passe doit contenir au moins 8 caractères, une lettre majuscule, une lettre minuscule et un chiffre et un caractère spécial (@, $, !, %, ?, &)",
     });
   }
 
@@ -158,7 +158,7 @@ export const validateUpdatePasswordData = (data: {
     errors.push({
       field: "newPassword",
       message:
-        "Le nouveau mot de passe doit contenir au moins 8 caractères, une lettre majuscule, une lettre minuscule et un chiffre",
+        "Le nouveau mot de passe doit contenir au moins 8 caractères, une lettre majuscule, une lettre minuscule et un chiffre et un caractère spécial (@, $, !, %, ?, &)",
     });
   }
 

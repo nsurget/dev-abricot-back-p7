@@ -241,6 +241,19 @@ export const createProject = async (
  *                           type: array
  *                           items:
  *                             $ref: '#/components/schemas/Project'
+ *                         tasks:
+ *                           type: array
+ *                           items:
+ *                             type: object
+ *                             properties:
+ *                               id:
+ *                                 type: string
+ *                         _count:
+ *                           type: object
+ *                           properties:
+ *                             tasks:
+ *                               type: number
+ * 
  *       401:
  *         description: Non authentifié
  *         content:
@@ -290,6 +303,14 @@ export const getProjects = async (
                 name: true,
               },
             },
+          },
+        },
+        tasks: {
+          where: {
+            status: "DONE",
+          },
+          select: {
+            id: true,
           },
         },
         _count: {
