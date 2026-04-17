@@ -306,16 +306,9 @@ export const getProjects = async (
           },
         },
         tasks: {
-          where: {
-            status: "DONE",
-          },
           select: {
             id: true,
-          },
-        },
-        _count: {
-          select: {
-            tasks: true,
+            status: true,
           },
         },
       },
